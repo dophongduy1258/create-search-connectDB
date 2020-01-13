@@ -3,6 +3,8 @@ var port = 3000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var userRoute = require('./routers/user.route');
+var loginRoute = require('./routers/login.route');
+var loginMiddleware = require('./middlewares/login.middleware');
 
 
 var app = express();
@@ -21,8 +23,8 @@ app.get('/',(req,res)=>{
 	res.render('index');
 });
 
-app.use('/users',userRoute);
-
+app.use('/users',loginMiddleware.requireLogin,userRoute);
+app.use('/login',loginRoute);
 
 
 
