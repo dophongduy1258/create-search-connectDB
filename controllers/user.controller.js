@@ -1,6 +1,7 @@
 var db = require('../db');
 var shortID = require('shortid');
 
+
 module.exports.index = (req,res)=>{
 	res.render('users/users',{lstUsers:db.get('lstUsers').value()});
 };
@@ -35,6 +36,9 @@ module.exports.postCreate = (req,res)=>{
 		return;
 	}
 	req.body.id = shortID.generate();
+
+	req.body.avatar = req.file.path.split('/').slice(1).join('/');
+
 	db.get('lstUsers').push(req.body).write();
 	res.redirect('/users');
 };

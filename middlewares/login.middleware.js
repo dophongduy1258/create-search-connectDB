@@ -1,5 +1,5 @@
 module.exports.requireLogin = (req,res,next)=>{
-	console.log(req.cookies, req.signedCookies);
+	// console.log(req.cookies, req.signedCookies);
 	if(!req.signedCookies.userID){
 		res.redirect('/login');
 	}
